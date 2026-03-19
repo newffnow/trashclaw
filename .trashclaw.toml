@@ -1,0 +1,60 @@
+# TrashClaw Project Configuration
+# https://github.com/Scottcjn/trashclaw/issues/67
+
+[project]
+name = "trashclaw"
+description = "Terminal-first AI agent harness with tool use"
+version = "1.0.0"
+
+# Auto-loaded context files on startup
+# These files are automatically read and included in the agent's context
+[context]
+auto_load = [
+    "README.md",           # Project overview and usage
+    "docs/CLI_REFERENCE.md",  # Command reference
+    "docs/TOOLS.md",       # Available tools documentation
+]
+
+# Optional: Load additional files based on patterns
+[context.patterns]
+include = ["*.md", "docs/*.md"]
+exclude = ["node_modules/**", ".git/**", "__pycache__/**"]
+
+# Backend configuration (auto-detected if not specified)
+[backend]
+# Uncomment to override auto-detection
+# type = "ollama"        # Options: ollama, lmstudio, openai, anthropic, dashscope
+# url = "http://localhost:11434"
+# model = "qwen2.5-coder:7b"
+
+# Tool configuration
+[tools]
+# Maximum file size for read operations (bytes)
+max_read_size = 1048576  # 1MB
+
+# Enable/disable specific tools
+enabled = [
+    "read_file",
+    "write_file",
+    "edit_file",
+    "search_files",
+    "find_files",
+    "list_dir",
+    "run_command",
+    "fetch_url",
+    "think",
+]
+
+# Session configuration
+[session]
+# Auto-save session history
+auto_save = true
+save_path = "~/.trashclaw/sessions"
+
+# Maximum conversation history to keep
+max_history = 100
+
+# Logging configuration
+[logging]
+level = "info"  # debug, info, warning, error
+file = "~/.trashclaw/trashclaw.log"
